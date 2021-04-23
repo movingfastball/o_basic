@@ -173,7 +173,7 @@ try{
 }
 */
 
-
+/*
 //6-10
 class Entree{
     public $name;
@@ -208,6 +208,60 @@ class ComboMeal extends Entree {
 }
 
 
+$soup = new Entree('Chicken Soup',array('chicken','water'));
+$sandwich = new Entree('chicken Sandwich',array('chicken2','bread2'));
+
+$combo = new ComboMeal('Soup + Sandwich',array($soup,$sandwich));
+
+foreach(['chicken1','water1','chicken2','bread2'] as $ing => $value){
+    if($combo->hasIngredient($value)){
+        print "Something in the combo contains $ing => $value<br>";
+    }
+}
+*/
+/*
+//6-12
+
+class Entree{
+    public $name;
+    public $ingredients = array();
+
+    public function __construct($name,$ingredients){
+        if(!is_array($ingredients)){
+            throw new Exception('$ingredients must be an array');
+        }
+        $this->name = $name;
+        $this->ingredients = $ingredients;
+    }
+
+    public function hasIngredient($ingredient){
+        print "Entree Oya<br>";
+        return in_array($ingredient,$this->ingredients);
+    }
+}
+
+
+class ComboMeal extends Entree {
+    public function __construct($name,$entrees){
+        parent::__construct($name,$entrees);
+        foreach($entrees as $entree){
+            if(! $entree instanceof Entree){
+                throw new Exception('Elements of $entrees must be Entree objects');
+            }
+        }
+    }
+
+    public function hasIngredient($ingredient){
+        foreach($this->ingredients as $entree){
+            if($entree->hasIngredient($ingredient)){
+                print "Entrede Kodomo<br>";
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
 $soup = new Entree('Chicken Soup',array('chicken1','water1'));
 $sandwich = new Entree('chicken Sandwich',array('chicken2','bread2'));
 
@@ -218,3 +272,59 @@ foreach(['chicken1','water1','chicken2','bread2'] as $ing => $value){
         print "Something in the combo contains $ing => $value<br>";
     }
 }
+*/
+
+/*
+//6-13
+class Entree{
+    private $name;
+    protected $ingredients = array();
+
+    public function getName(){
+        return $this->name;
+    }
+
+    public function __construct($name,$ingredients){
+        if(!is_array($ingredients)){
+            throw new Exception('$ingredients must be an array');
+        }
+        $this->name = $name;
+        $this->ingredients = $ingredients;
+    }
+
+    public function hasIngredient($ingredient){
+        return in_array($ingredient,$this->ingredients);
+    }
+}
+
+$soup = new Entree('Chicken Soup',array('chicken1','water1'));
+$sandwich = new Entree('chicken Sandwich',array('chicken2','bread2'));
+
+
+foreach(['chicken1','water1','chicken2','bread2'] as $ing => $value){
+
+        print "Something in the combo contains $ing => $value<br>";
+
+}
+*/
+/*
+//6-14
+namespace o_basic;
+class Fruit{
+    public static function munch($bite){
+        print "Here is a tiny munch of $bite";
+    }
+}
+*/
+/*
+//6-15
+use Tiny\Eating\Fruit as Snack;
+
+use Tiny\Fruit;
+
+//Tiny\Eating\Fruit::munch();を呼び出す
+Snack::munch("strawberry");
+
+//Tiny\Fruit::munch();をよびだす
+Fruit::munch("orange");
+*/
