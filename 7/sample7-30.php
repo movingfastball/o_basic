@@ -1,5 +1,5 @@
 <?php
-require 'sample7-29.php';
+require 'FormHelper.php';
 
 $sweets = array(
     'puff'=>'Sesame Seed Puff',
@@ -51,7 +51,7 @@ function validate_form(){
     }
 
     $input['sweet'] = $_POST['sweet'] ?? '';
-    if(! array_key_exists($input['sweet'],$GLOBALS['sweet'])){
+    if(! array_key_exists($input['sweet'],$GLOBALS['sweets'])){
         $errors[] = 'Please select a valid sweet item.';
     }
 
